@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import Link from 'next/link'
 const Header = () => {
   return (
@@ -6,9 +7,12 @@ const Header = () => {
         <h2>Payment site</h2>
         <div className='items-center flex gap-2'>
             <div className='w-8 h-8 bg-white rounded-full text-zinc-600 flex justify-center items-center'>U</div>
-            <h2 className='mr-5'>User</h2>
-        <Link href={'signIn'}>
-            Login
+            <h2 onClick={()=>{
+          console.log(localStorage.getItem("token"));
+          localStorage.removeItem("token")
+        }} className='mr-5'>user</h2>
+        <Link href={"signup"}>
+            {"logout"}
         </Link></div>
     </div>
   )

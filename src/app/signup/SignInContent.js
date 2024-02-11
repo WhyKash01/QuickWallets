@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import InputField from "./InputField";
 import Link from "next/link"
 import  axios  from "axios";
-import { response } from "express";
 const SignInContent = () => {
   const [firstName, setfirstName]= useState("")
   const [LastName, setLastName]= useState("")
@@ -27,15 +26,15 @@ const SignInContent = () => {
       <InputField onChange={(e)=>{
         setpassword(e.target.value)
       }} title={"Password"} placeholder={"123456"} />
-      <button type="submit" onClick={()=>{
-        const response=axios.post("http://localhost:3000/api/v1/user/signup",
+      <button type="submit" onClick={async()=>{
+        const response=await axios.post("http://localhost:3000/api/v1/user/signup",
         {
           username: userName,
           firstName,
           lastName: LastName,
           password
         })
-        console.log(response)
+        localStorage.setItem("token", response.data.token);
       }} className="bg-black mt-5 py-2 rounded-md text-white w-[100%] ">
         Sign In
       </button>
